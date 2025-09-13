@@ -3,52 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelişmiş DOM ve Event Yönetimi</title>  
+    <title>Mutation Observer</title>      
     <style>
         body{
-            background-color: rgb(42, 41, 41);
-            color:white;
+            background-color: rgb(48, 45, 45);
+            color: white;
+        }       
+        #demo {
+        border: 2px solid #444;
+        padding: 20px;
+        margin: 20px;
+        font-family: Arial, sans-serif;
         }
+        button {
+        margin: 5px;
+        padding: 8px 12px;
+        } 
     </style>
 </head>
 <body>
-    
-    <!-- <div id="app">
-        <button class="btn2"></button>
-    </div>
-    <div id="content">
 
+    <!-- <button id="addElement">Eleman Ekle</button>
+    <div id="target">
     </div> -->
 
-    <!-- <div id="parent" style="padding:20px;background-color: lightblue;">
-        Parent
-        <button id="child">Child</button>
-    </div> -->
+    <div id="target">Başlangıç İçeriği</div>
 
-    <!-- <div id="grandparent" style="padding: 30px;background-color: lightblue;">
-        Grandparent
-        <div id="parent" style="padding: 20px;background-color: lightgreen;">
-            Parent
-            <button id="child">Child</button>
-        </div>
-    </div> -->
+    <button id="changeText">Metin Değiştir</button>
+    <button id="attr">Attribute Ekle</button>
+    <button id="child">Yeni Eleman Ekle</button>
 
-    <!-- <ul id="menu">
-        <li data-id="1">Menü 1</li>
-        <li data-id="2">Menü 2</li>
-        <li data-id="3">Menü 3</li>
-    </ul> -->
-
-    <!-- <div id="box" style="background-color: lightgreen;padding: 20px;">
-        <button id="btn">Button</button>
-    </div> -->
-
-    <!-- <div id="box" style="background-color: lightgreen;padding: 20px;">
-        <a href="https://google.com" id="link">Google</a>
-    </div> -->
-
-    <button id="btn">Tıkla!</button>
-    <button id="btn2" data-id="1">Tıkla!</button>
 
 <script src="index.js"></script>
 </body>

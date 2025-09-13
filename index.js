@@ -1,113 +1,66 @@
-//----Ekleme
-// const app=document.getElementById("app");
+// const target=document.getElementById("target");
 
-// const btn=document.createElement("button");
-// btn.textContent="Tıkla!";
-// btn.classList.add("btn");
-
-// app.appendChild(btn);
-
-// //----Güncelleme
-// const btn2=document.querySelector(".btn2");
-// btn2.textContent="Tıkladım!";
-// btn2.style.backgroundColor="tomato";
-
-//Silme
-
-// btn2.remove();
-
-// //innerHTML ve innerText farkı
-// const contentDiv=document.getElementById("content");
-// contentDiv.innerText="<b>Merhaba</b>";
-// contentDiv.innerHTML="<b>Merhaba</b>";
-
-// function btnClick(){
-// alert("Butona tıklandı!");
-// }
-
-//Event Yönetimi
-// btn.addEventListener("click",()=>{
-//     alert("Butona tıklandı!");
-// });
-// contentDiv.addEventListener("click",()=>{
-//     alert("Div'e tıklandı!");
-// });
-
-// btn.addEventListener("click",btnClick);
-
-// btn.removeEventListener("click",btnClick);
-
-// btn.addEventListener("click",()=>{
-//     console.log("1 kere çalıştı");
-// },{once:true});
-
-//Event Bubbling (içten dışa yayılma)
-
-// document.getElementById("parent").addEventListener("click",()=>{
-//     console.log("Parent çalıştı");
-// });
-// document.getElementById("child").addEventListener("click",()=>{
-//     console.log("Child çalıştı");
-// });
-// document.getElementsByTagName("body")[0].addEventListener("click",()=>{
-//     console.log("Grandparent çalıştı");
-// });
-
-//Event Capturing (dıştan içe yakalama)
-
-// const log=(msg)=>console.log(msg);
-
-// document.getElementById("grandparent").addEventListener("click",()=>log("Grandparent capturing"),true);
-// document.getElementById("parent").addEventListener("click",()=>log("Parent capturing"),{capture:true});
-// document.getElementById("child").addEventListener("click",()=>log("Child target"));
-// document.getElementById("parent").addEventListener("click",()=>log("Parent bubling"));
-// document.getElementById("grandparent").addEventListener("click",()=>log("Grandparent bubling"));
-
-//event delegation
-// document.getElementById("menu").addEventListener("click",(e)=>{
-//     if(e.target.tagName=="LI"){
-//         console.log("Tıklanan id:",e.target.dataset.id);
+// const observer=new MutationObserver((mutationList)=>{
+//     for(mutationRecord of mutationList){
+//         console.log(mutationRecord.type,mutationRecord);
+//         if(mutationRecord.type=="childList" && mutationRecord.addedNodes.length>0){
+//             console.log("yeni eleman eklendi");
+//         }
 //     }
 // });
 
-//event.target vs event.currentTarget
+// observer.observe(target,{childList:true});
 
-// document.getElementById("box").addEventListener("click",(e)=>{
-//     console.log("target:",e.target);
-//     console.log("currentTarget:",e.currentTarget);
+// document.getElementById("addElement").addEventListener("click",function(){
+//     let pTag=document.createElement("p");
+//     pTag.textContent="Merhaba Dünya!";
+//     target.appendChild(pTag);
 // });
 
-// document.getElementById("link").addEventListener("click",(e)=>{
-//     e.preventDefault();
-//     e.stopPropagation();
-//     console.log("Link tıklandı ama gidilmedi!");
-// });
+// setTimeout(() => {
+//     observer.disconnect();
+// }, 5000);
 
-// document.getElementById("box").addEventListener("click",(e)=>{
-//     console.log("box'a tıklandı!");
-// });
+const target = document.getElementById("target");
 
-// document.addEventListener("keydown",(e)=>{
-//     if(e.key==="Enter"){
-//         console.log("Enter tuşuna basıldı.");
-//     }
-// });
+    document.getElementById("changeText").addEventListener("click", () => {
+    //   target.textContent = "Metin değiştirildi!";
+        target.firstChild.data="Metin değiştirildi!";
+    });
 
-// const btn=document.getElementById("btn");
+    document.getElementById("attr").addEventListener("click", () => {
+      target.setAttribute("data-info", "observer çalıştı");
+    });
 
-// btn.classList.add("active");
-// btn.classList.remove("active");
-// btn.classList.toggle("active");
+    document.getElementById("child").addEventListener("click", () => {
+      const p = document.createElement("p");
+      p.textContent = "Yeni eleman eklendi!";
+      target.appendChild(p);
+    });
+    
+    const observer = new MutationObserver((mutationsList) => {
+      for (let mutation of mutationsList) {
+        console.log("Değişiklik tipi:", mutation.type);
 
-const btn2=document.getElementById("btn2");
-console.log(btn2.dataset.id);
+        if (mutation.type === "childList") {
+          console.log("Eklenen:", mutation.addedNodes);
+          console.log("Silinen:", mutation.removedNodes);
+        }
 
-const target=document.body;
+        if (mutation.type === "attributes") {
+          console.log("Değişen attribute:", mutation.attributeName);
+        }
 
-const observer=new MutationObserver((mutations)=>{
-    console.log("DOM değişti",mutations);
-});
+        if (mutation.type === "characterData") {
+          console.log("Metin değişti:", mutation.target.data);
+        }
+      }
+    });
 
-observer.observe(target,{childList:true,subtree:true});
-
-target.appendChild(document.createElement("p"));
+    observer.observe(target, {
+      childList: true,
+      attributes: true,
+      characterData: true,
+      subtree: true
+    });
+    
