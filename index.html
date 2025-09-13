@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asenkron Programlama</title>  
+    <title>Gelişmiş DOM ve Event Yönetimi</title>  
     <style>
         body{
             background-color: rgb(42, 41, 41);
@@ -13,8 +13,42 @@
 </head>
 <body>
     
-<button onclick="blockUI()">İşlem Başlat</button>
-<button onclick="helloWorld()">Merhaba Dünya</button>
+    <!-- <div id="app">
+        <button class="btn2"></button>
+    </div>
+    <div id="content">
+
+    </div> -->
+
+    <!-- <div id="parent" style="padding:20px;background-color: lightblue;">
+        Parent
+        <button id="child">Child</button>
+    </div> -->
+
+    <!-- <div id="grandparent" style="padding: 30px;background-color: lightblue;">
+        Grandparent
+        <div id="parent" style="padding: 20px;background-color: lightgreen;">
+            Parent
+            <button id="child">Child</button>
+        </div>
+    </div> -->
+
+    <!-- <ul id="menu">
+        <li data-id="1">Menü 1</li>
+        <li data-id="2">Menü 2</li>
+        <li data-id="3">Menü 3</li>
+    </ul> -->
+
+    <!-- <div id="box" style="background-color: lightgreen;padding: 20px;">
+        <button id="btn">Button</button>
+    </div> -->
+
+    <!-- <div id="box" style="background-color: lightgreen;padding: 20px;">
+        <a href="https://google.com" id="link">Google</a>
+    </div> -->
+
+    <button id="btn">Tıkla!</button>
+    <button id="btn2" data-id="1">Tıkla!</button>
 
 <script src="index.js"></script>
 </body>
