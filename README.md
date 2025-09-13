@@ -46,4 +46,18 @@
 * * Dataset (Custom Attributes)
 * * MutationObserver (DOM değişikliklerini izleme)
 
-
+## 5. Mutation Observer
+* Giriş
+* * Mutation Observer nedir?
+* * Kullanım Senaryoları
+* Temel Kullanım
+* Mutation Observer Konfigürasyonları
+* MutationRecord Nesnesi
+* * mutation.type
+* * mutation.target
+* * mutation.addedNodes
+* * mutation.removedNodes
+* * mutation.attributeName
+* * mutation.oldValue
+* disconnect()
+* Örnek
