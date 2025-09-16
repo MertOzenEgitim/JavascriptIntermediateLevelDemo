@@ -61,3 +61,16 @@
 * * mutation.oldValue
 * disconnect()
 * Örnek
+
+## 6. Hata Yönetimi
+* Hata Türleri
+* * SyntaxError → Kodlama hatası
+* * ReferenceError → Tanımlanmamış değişken/nesneye erişim
+* * TypeError → Yanlış tip kullanımı (ör. null.toString())
+* * RangeError → Geçersiz sayı aralıkları (ör. new Array(-1))
+* * URIError → Çok nadir kullanılan özel hatalar
+* try...catch...finally
+* Hata Fırlatma (throw)
+* Custom Error Sınıfları
+* Asenkron Kodlarda Hata Yönetimi
+* Global Hata Yakalama
