@@ -1,66 +1,153 @@
-// const target=document.getElementById("target");
+// try {
+//   let x=10;
+//   let x=20;
+// } catch (error) {
+//   console.log(error);
+// }
 
-// const observer=new MutationObserver((mutationList)=>{
-//     for(mutationRecord of mutationList){
-//         console.log(mutationRecord.type,mutationRecord);
-//         if(mutationRecord.type=="childList" && mutationRecord.addedNodes.length>0){
-//             console.log("yeni eleman eklendi");
-//         }
+
+// try {
+//   console.log(x);
+// } catch (error) {
+//   console.log(error.name);
+// }
+
+// try {
+//   let obj=null;
+//   obj.toString();
+// } catch (error) {
+//   console.log(error);
+// }
+
+// try {
+//   let arr=new Array(-1);
+// } catch (error) {
+//   console.log(error);
+// }
+
+// try {
+//   decodeURI("%");
+// } catch (error) {
+//   console.log(error);
+// }
+
+// try {
+//   decodeURI("%");
+// } catch (error) {
+//   console.log(error);
+// } finally{
+
+// }
+
+// function divide(a,b){
+//   if(b===0){
+//     throw new Error("Sıfıra bölme hatası!");
+//   }
+//   return a/b;
+// }
+
+// try {
+//   console.log(divide(10,0));
+// } catch (error) {
+//   console.log(error);
+// }
+
+// class ValidationError extends Error {
+//   constructor(message) {
+//     super(message);
+//     this.name = "ValidationError";
+//   }
+// }
+
+// function registerUser(username) {
+//   if (!username) {
+//     throw new ValidationError("Kullanıcı adı boş olamaz!");
+//   }
+//   return "Kayıt başarılı!";
+// }
+
+// try {
+//   registerUser("");
+// } catch (err) {
+//   console.log(`${err.name}: ${err.message}`);
+// }
+
+// function readDataFromServer(callback) {
+//   setTimeout(() => {
+//     const success = Math.random() > 0.5; 
+//     if (!success) {
+//       return callback(new Error("Sunucuya ulaşılamadı!"), null);
 //     }
+//     return callback(null, { id: 1, name: "Test Data" });
+//   }, 1000);
+// }
+
+// readDataFromServer((err, data) => {
+//   if (err) {
+//     console.error("Callback ile yakalanan hata:", err.message);
+//     return;
+//   }
+//   console.log("Callback sonucu:", data);
 // });
 
-// observer.observe(target,{childList:true});
+  // fetch("https://jsonplaceholder.typicode.com/wrong-url")
+  // .then(res =>{
 
-// document.getElementById("addElement").addEventListener("click",function(){
-//     let pTag=document.createElement("p");
-//     pTag.textContent="Merhaba Dünya!";
-//     target.appendChild(pTag);
+  // }).catch(err => console.log("Promise Hatası:", err.message));
+
+// fetch("https://jsonplaceholder.typicode.com/wrong-url")
+//   .then(res => {
+//     console.log("Status:", res.status); // 404
+//     if (!res.ok) {
+//       throw new Error(`HTTP Hatası! Kod: ${res.status}`);
+//     }
+//     return res.json();
+//   })
+//   .then(data => console.log(data))
+//   .catch(err => console.log("Promise Hatası:", err.message));
+
+
+// async function getData() {
+//   try {
+//     let res = await fetch("https://jsonplaceholder.typicode.com/wrong-url");
+
+//     if (!res.ok) {
+//       throw new Error(`HTTP Hatası! Kod: ${res.status}`);
+//     }
+
+//     let data = await res.json();
+//     console.log(data);
+//   } catch (err) {
+//     console.error("Async/Await Hatası:", err.message);
+//   }
+// }
+// getData();
+
+// window.onerror = function (message, source, lineno, colno, error) {
+//   console.error("Global Hata Yakalandı:");
+//   console.log("Mesaj:", message);
+//   console.log("Kaynak:", source);
+//   console.log("Satır/Sütun:", lineno, colno);
+//   console.log("Error objesi:", error);
+//   return true; 
+// };
+
+// nonExistentFunction();
+
+
+
+// window.onunhandledrejection = function (event) {
+//   console.log("Yakalanmamış Promise Hatası:", event.reason);
+// };
+
+// new Promise((_, reject) => reject("Bir hata oluştu!"));
+
+
+
+// window.addEventListener("error", (event) => {
+//   console.error("Event Listener ile Hata:", event.message);
 // });
 
-// setTimeout(() => {
-//     observer.disconnect();
-// }, 5000);
-
-const target = document.getElementById("target");
-
-    document.getElementById("changeText").addEventListener("click", () => {
-    //   target.textContent = "Metin değiştirildi!";
-        target.firstChild.data="Metin değiştirildi!";
-    });
-
-    document.getElementById("attr").addEventListener("click", () => {
-      target.setAttribute("data-info", "observer çalıştı");
-    });
-
-    document.getElementById("child").addEventListener("click", () => {
-      const p = document.createElement("p");
-      p.textContent = "Yeni eleman eklendi!";
-      target.appendChild(p);
-    });
-    
-    const observer = new MutationObserver((mutationsList) => {
-      for (let mutation of mutationsList) {
-        console.log("Değişiklik tipi:", mutation.type);
-
-        if (mutation.type === "childList") {
-          console.log("Eklenen:", mutation.addedNodes);
-          console.log("Silinen:", mutation.removedNodes);
-        }
-
-        if (mutation.type === "attributes") {
-          console.log("Değişen attribute:", mutation.attributeName);
-        }
-
-        if (mutation.type === "characterData") {
-          console.log("Metin değişti:", mutation.target.data);
-        }
-      }
-    });
-
-    observer.observe(target, {
-      childList: true,
-      attributes: true,
-      characterData: true,
-      subtree: true
-    });
-    
+// window.addEventListener("unhandledrejection", (event) => {
+//   console.error("Event Listener ile Promise Hatası:", event.reason);
+// });
