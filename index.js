@@ -1,153 +1,171 @@
-// try {
-//   let x=10;
-//   let x=20;
-// } catch (error) {
-//   console.log(error);
-// }
+// const form=document.getElementById("registerForm");
+// const emailInput=document.getElementById("email");
 
-
-// try {
-//   console.log(x);
-// } catch (error) {
-//   console.log(error.name);
-// }
-
-// try {
-//   let obj=null;
-//   obj.toString();
-// } catch (error) {
-//   console.log(error);
-// }
-
-// try {
-//   let arr=new Array(-1);
-// } catch (error) {
-//   console.log(error);
-// }
-
-// try {
-//   decodeURI("%");
-// } catch (error) {
-//   console.log(error);
-// }
-
-// try {
-//   decodeURI("%");
-// } catch (error) {
-//   console.log(error);
-// } finally{
-
-// }
-
-// function divide(a,b){
-//   if(b===0){
-//     throw new Error("Sıfıra bölme hatası!");
+// emailInput.addEventListener("input",()=>{
+//   if(!emailInput.value.endsWith("@gmail.com")){
+//     emailInput.setCustomValidity("Sadece gmail adresi kabul edilir!");
+//   }else{
+//     emailInput.setCustomValidity("");
 //   }
-//   return a/b;
-// }
-
-// try {
-//   console.log(divide(10,0));
-// } catch (error) {
-//   console.log(error);
-// }
-
-// class ValidationError extends Error {
-//   constructor(message) {
-//     super(message);
-//     this.name = "ValidationError";
-//   }
-// }
-
-// function registerUser(username) {
-//   if (!username) {
-//     throw new ValidationError("Kullanıcı adı boş olamaz!");
-//   }
-//   return "Kayıt başarılı!";
-// }
-
-// try {
-//   registerUser("");
-// } catch (err) {
-//   console.log(`${err.name}: ${err.message}`);
-// }
-
-// function readDataFromServer(callback) {
-//   setTimeout(() => {
-//     const success = Math.random() > 0.5; 
-//     if (!success) {
-//       return callback(new Error("Sunucuya ulaşılamadı!"), null);
-//     }
-//     return callback(null, { id: 1, name: "Test Data" });
-//   }, 1000);
-// }
-
-// readDataFromServer((err, data) => {
-//   if (err) {
-//     console.error("Callback ile yakalanan hata:", err.message);
-//     return;
-//   }
-//   console.log("Callback sonucu:", data);
 // });
 
-  // fetch("https://jsonplaceholder.typicode.com/wrong-url")
-  // .then(res =>{
-
-  // }).catch(err => console.log("Promise Hatası:", err.message));
-
-// fetch("https://jsonplaceholder.typicode.com/wrong-url")
-//   .then(res => {
-//     console.log("Status:", res.status); // 404
-//     if (!res.ok) {
-//       throw new Error(`HTTP Hatası! Kod: ${res.status}`);
-//     }
-//     return res.json();
-//   })
-//   .then(data => console.log(data))
-//   .catch(err => console.log("Promise Hatası:", err.message));
-
-
-// async function getData() {
-//   try {
-//     let res = await fetch("https://jsonplaceholder.typicode.com/wrong-url");
-
-//     if (!res.ok) {
-//       throw new Error(`HTTP Hatası! Kod: ${res.status}`);
-//     }
-
-//     let data = await res.json();
-//     console.log(data);
-//   } catch (err) {
-//     console.error("Async/Await Hatası:", err.message);
+// form.addEventListener("submit",(e)=>{
+//   e.preventDefault();
+//   if(form.checkValidity()){
+//     alert("Form başarıyla gönderildi!");
+//   }else{
+//     form.reportValidity();
 //   }
-// }
-// getData();
+// });
 
-// window.onerror = function (message, source, lineno, colno, error) {
-//   console.error("Global Hata Yakalandı:");
-//   console.log("Mesaj:", message);
-//   console.log("Kaynak:", source);
-//   console.log("Satır/Sütun:", lineno, colno);
-//   console.log("Error objesi:", error);
-//   return true; 
+//-----------------History API
+//replaceState ->mevcut state'i değiştirir
+// const content=document.getElementById("content");
+
+// document.getElementById("page1").onclick=()=>{
+//   history.pushState({page:1},"Sayfa 1","?page=1");
+//   content.innerText="Burası Sayfa 1";
 // };
 
-// nonExistentFunction();
-
-
-
-// window.onunhandledrejection = function (event) {
-//   console.log("Yakalanmamış Promise Hatası:", event.reason);
+// document.getElementById("page2").onclick=()=>{
+//   history.pushState({page:2},"Sayfa 2","?page=2");
+//   content.innerText="Burası Sayfa 2";
 // };
 
-// new Promise((_, reject) => reject("Bir hata oluştu!"));
-
-
-
-// window.addEventListener("error", (event) => {
-//   console.error("Event Listener ile Hata:", event.message);
+// window.addEventListener("popstate",(e)=>{
+//   content.innerText=e.state?`Geri geldin -> Sayfa ${e.state.page}`:"Anasayfa";
 // });
 
-// window.addEventListener("unhandledrejection", (event) => {
-//   console.error("Event Listener ile Promise Hatası:", event.reason);
-// });
+//----------------Storage API
+
+//localStorage:tarayıcı kapatılsada verileri saklar
+//sessionStorage:sekme kapatıldığında veriler temizlenir
+
+//setItem,getItem,removeItem
+
+// document.getElementById("save").onclick=()=>{
+//   localStorage.setItem("theme","dark");
+//   alert("Tema dark olarak kaydedildi!");
+// };
+
+// document.getElementById("load").onclick=()=>{
+//   const theme=localStorage.getItem("theme","dark");
+//   alert("Kayıtlı tema:"+(theme || "Bulunamadı"));
+// };
+
+// document.getElementById("clear").onclick=()=>{
+//   localStorage.removeItem("theme");
+//   alert("Tema silindi!");
+// };
+
+//---------------- Fetch API
+
+// Tüm gönderileri çek
+// async function getPosts() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//   const data = await res.json();
+//   console.log("Tüm gönderiler:", data.slice(0, 5)); 
+// }
+
+// // Belirli bir gönderiyi çek (id=1)
+// async function getPostById(id) {
+//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+//   const data = await res.json();
+//   console.log("Gönderi Detayı:", data);
+// }
+
+// getPosts();
+// getPostById(1);
+
+// //---------
+
+// async function createPost() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({
+//       title: "Yeni gönderi",
+//       body: "Bu bir deneme gönderisidir",
+//       userId: 1
+//     })
+//   });
+
+//   const data = await res.json();
+//   console.log("Oluşturulan gönderi:", data);
+// }
+
+// createPost();
+
+// //------
+
+// async function updatePost() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({
+//       id: 1,
+//       title: "Güncellenmiş gönderi",
+//       body: "Bu gönderi PUT ile tamamen güncellendi",
+//       userId: 1
+//     })
+//   });
+
+//   const data = await res.json();
+//   console.log("PUT Sonucu:", data);
+// }
+
+// updatePost();
+
+// //--------------
+
+// async function patchPost() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "PATCH",
+//     headers: {
+//       "Content-Type": "application/json"
+//     },
+//     body: JSON.stringify({
+//       title: "Sadece başlık güncellendi"
+//     })
+//   });
+
+//   const data = await res.json();
+//   console.log("PATCH Sonucu:", data);
+// }
+
+// patchPost();
+
+// //-----------
+
+// async function deletePost() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "DELETE"
+//   });
+
+//   if (res.ok) {
+//     console.log("Gönderi silindi (simülasyon)");
+//   } else {
+//     console.error("Silme işlemi başarısız!");
+//   }
+// }
+
+// deletePost();
+
+//---Worker API
+
+let currentValue=0;
+function btnClick(){ 
+  currentValue++;
+  console.log(currentValue);
+}
+
+const worker=new Worker("worker.js");
+
+worker.postMessage(45);
+worker.onmessage=(e)=>{
+  alert("Sonuç:"+e.data);
+}
