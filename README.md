@@ -74,3 +74,34 @@
 * Custom Error Sınıfları
 * Asenkron Kodlarda Hata Yönetimi
 * Global Hata Yakalama
+
+## 7. Javascript Web APIs
+* Forms API
+* * checkValidity()
+* * reportValidity()
+* * setCustomValidity()
+* History API
+* * pushState()
+* * replaceState()
+* * popState()
+* Storage API
+* * Local Storage
+* * Session Storage
+* * setItem
+* * getItem
+* * removeItem
+* Fetch API
+* * HTTP istekleri(get,post,put,patch,delete),
+* * Hata yönetimi
+* Worker API
+* * Arkaplan işlemleri
+* Daha Fazlası
+* * Geolocation API
+* * Media Devices API
+* * Notifications API
+* * WebSocket API
+* * Clipboard API
+* * Device Orientation & Motion API
+* * File API
+* * IndexedDB API
+* * Canvas API
