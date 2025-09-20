@@ -1,171 +1,82 @@
-// const form=document.getElementById("registerForm");
-// const emailInput=document.getElementById("email");
+// const now=new Date();
 
-// emailInput.addEventListener("input",()=>{
-//   if(!emailInput.value.endsWith("@gmail.com")){
-//     emailInput.setCustomValidity("Sadece gmail adresi kabul edilir!");
-//   }else{
-//     emailInput.setCustomValidity("");
-//   }
+// console.log(now.getTime()); //timestamp
+
+// const start=new Date("2025-09-20T08:00:00");
+// const end=new Date("2025-09-22T15:30:00");
+
+// const diffDT=end.getTime()-start.getTime();
+
+// const diffSeconds=Math.floor(diffDT/1000);
+// const diffMinutes=Math.floor(diffDT/(1000*60));
+// const diffHours=Math.floor(diffDT/(1000*60*60));
+// const diffDays=Math.floor(diffDT/(1000*60*60*24));
+
+
+// console.log("saniye:",diffSeconds);
+// console.log("dakika:",diffMinutes);
+// console.log("saat:",diffHours);
+// console.log("gün:",diffDays);
+
+
+//----------
+// const today=new Date();
+// const nextWeek=new Date(today);
+
+// nextWeek.setDate(today.getDate()+7);
+
+// const lastMonth=new Date(today);
+// lastMonth.setMonth(today.getMonth()-1);
+
+// console.log("Bugün:",today.toDateString());
+// console.log("1 Hafta Sonra:",nextWeek.toDateString());
+// console.log("1 Ay Önce:",lastMonth.toDateString());
+
+//-------------
+//toISOString()
+
+// const now=new Date();
+// console.log(now.toISOString());
+
+// //toLocaleString()
+
+// console.log(now.toLocaleString());
+// console.log(now.toLocaleString("tr-TR"));
+// console.log(now.toLocaleString("en-US"));
+// console.log(now.toLocaleString("en-US",{timeZone:"America/New_York"}));
+
+// console.log(now.toLocaleDateString());
+// console.log(now.toLocaleDateString("en-US"));
+
+// //Intl.DateTimeFormat
+// const formatter=new Intl.DateTimeFormat("tr-TR",{
+//   weekday:"long",
+//   year:"numeric",
+//   month:"long",
+//   day:"numeric",
+//   hour:"2-digit",
+//   minute:"2-digit",
+//   second:"2-digit",
+//   timeZone:"Europe/Istanbul"
 // });
 
-// form.addEventListener("submit",(e)=>{
-//   e.preventDefault();
-//   if(form.checkValidity()){
-//     alert("Form başarıyla gönderildi!");
-//   }else{
-//     form.reportValidity();
-//   }
-// });
+// console.log(formatter.format(now));
 
-//-----------------History API
-//replaceState ->mevcut state'i değiştirir
-// const content=document.getElementById("content");
+//alternatif kütüphaneler
+import { format,addDays,subMonths,differenceInDays,differenceInHours } from "https://cdn.skypack.dev/date-fns";
+import { tr } from "https://cdn.skypack.dev/date-fns/locale";
 
-// document.getElementById("page1").onclick=()=>{
-//   history.pushState({page:1},"Sayfa 1","?page=1");
-//   content.innerText="Burası Sayfa 1";
-// };
+const today=new Date();
+const oneWeekLater=addDays(today,7);
+const threeMonthAgo=subMonths(today,3);
 
-// document.getElementById("page2").onclick=()=>{
-//   history.pushState({page:2},"Sayfa 2","?page=2");
-//   content.innerText="Burası Sayfa 2";
-// };
+console.log(oneWeekLater);
+console.log(threeMonthAgo);
 
-// window.addEventListener("popstate",(e)=>{
-//   content.innerText=e.state?`Geri geldin -> Sayfa ${e.state.page}`:"Anasayfa";
-// });
+const start=new Date("2025-09-20T08:00:00");
+const end=new Date("2025-09-22T15:30:00");
 
-//----------------Storage API
+console.log("Gün farkı:",differenceInDays(end,start));
+console.log("Saat farkı:",differenceInHours(end,start));
 
-//localStorage:tarayıcı kapatılsada verileri saklar
-//sessionStorage:sekme kapatıldığında veriler temizlenir
-
-//setItem,getItem,removeItem
-
-// document.getElementById("save").onclick=()=>{
-//   localStorage.setItem("theme","dark");
-//   alert("Tema dark olarak kaydedildi!");
-// };
-
-// document.getElementById("load").onclick=()=>{
-//   const theme=localStorage.getItem("theme","dark");
-//   alert("Kayıtlı tema:"+(theme || "Bulunamadı"));
-// };
-
-// document.getElementById("clear").onclick=()=>{
-//   localStorage.removeItem("theme");
-//   alert("Tema silindi!");
-// };
-
-//---------------- Fetch API
-
-// Tüm gönderileri çek
-// async function getPosts() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-//   const data = await res.json();
-//   console.log("Tüm gönderiler:", data.slice(0, 5)); 
-// }
-
-// // Belirli bir gönderiyi çek (id=1)
-// async function getPostById(id) {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
-//   const data = await res.json();
-//   console.log("Gönderi Detayı:", data);
-// }
-
-// getPosts();
-// getPostById(1);
-
-// //---------
-
-// async function createPost() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       title: "Yeni gönderi",
-//       body: "Bu bir deneme gönderisidir",
-//       userId: 1
-//     })
-//   });
-
-//   const data = await res.json();
-//   console.log("Oluşturulan gönderi:", data);
-// }
-
-// createPost();
-
-// //------
-
-// async function updatePost() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       id: 1,
-//       title: "Güncellenmiş gönderi",
-//       body: "Bu gönderi PUT ile tamamen güncellendi",
-//       userId: 1
-//     })
-//   });
-
-//   const data = await res.json();
-//   console.log("PUT Sonucu:", data);
-// }
-
-// updatePost();
-
-// //--------------
-
-// async function patchPost() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-//     method: "PATCH",
-//     headers: {
-//       "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//       title: "Sadece başlık güncellendi"
-//     })
-//   });
-
-//   const data = await res.json();
-//   console.log("PATCH Sonucu:", data);
-// }
-
-// patchPost();
-
-// //-----------
-
-// async function deletePost() {
-//   const res = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-//     method: "DELETE"
-//   });
-
-//   if (res.ok) {
-//     console.log("Gönderi silindi (simülasyon)");
-//   } else {
-//     console.error("Silme işlemi başarısız!");
-//   }
-// }
-
-// deletePost();
-
-//---Worker API
-
-let currentValue=0;
-function btnClick(){ 
-  currentValue++;
-  console.log(currentValue);
-}
-
-const worker=new Worker("worker.js");
-
-worker.postMessage(45);
-worker.onmessage=(e)=>{
-  alert("Sonuç:"+e.data);
-}
+console.log(format(today,"do MMMM yyyy, EEEE",{locale:tr}));
